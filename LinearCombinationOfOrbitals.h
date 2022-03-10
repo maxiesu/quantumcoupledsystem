@@ -69,6 +69,12 @@ class LinearCombinationOfOrbitals : public EigenvalueProblem
 
         bool estimate_spectrum_shift; //!< calculate spectrum shift from band edges;
 
+        unsigned int degeneracy; //!< the degeneracy factor
+
+        unsigned int num_el_states; //!< number of electron states to be calculated
+
+        unsigned int num_hl_states; //!< number of hole states to be calculated
+
       };
 
 
@@ -158,6 +164,10 @@ class LinearCombinationOfOrbitals : public EigenvalueProblem
 
 
     options solver_opt, opt;
+
+
+
+    libMeshEnums::QuadratureType _quadrature_type;
 
 
 

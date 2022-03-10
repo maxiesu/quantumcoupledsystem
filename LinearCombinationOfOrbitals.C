@@ -396,9 +396,6 @@ void LinearCombinationOfOrbitals::solve_eigen_value_problem
 
 
 
-
-
-
 void LinearCombinationOfOrbitals::parse_options(void)
 {
   const ModelOptions& sol_opt = get_solver_options();
@@ -461,8 +458,128 @@ void LinearCombinationOfOrbitals::parse_options(void)
     solver_opt.st_ksp_type = std::string("preonly");
   }
 
-}
 
+
+
+
+  // this is useful afterwards
+   char singleband = 0x0;
+   if (get_options().has_submodel("Physics"))
+   {
+     ModelOptions::const_submodel_iterator it(get_options().submodels_begin("Physics"));
+     const ModelOptions& opts = it->second;
+
+     std::string model = opts.get_option("model", "8x8");
+
+     if (model == "conduction_band")
+       singleband = 'c';
+     else if (model == "single_band")
+     {
+       std::string particle = opts.get_option("particle", "el");
+       if (particle == "el")
+         singleband = 'c';
+       else if (particle == "hl")
+         singleband = 'v';
+       else
+       {
+         throw InitFailedException("In " +  get_name() + ": \'" + particle +
+           " is unknown particle for 'single_band' model.");
+       }
+     }
+     else if (model == "valence_band")
+       singleband = 'v';
+     else if (model == "2x2")
+       singleband = 'b';
+     else if (model == "6x6")
+       singleband = 'v';
+
+     // a quirky way to adjust degeneracy for certain singleband models
+     switch (singleband)
+     {
+       case 'v':
+         if (model == "6x6")
+           break;
+
+       case 'b':
+       case 'c':
+       case '1':
+         opt.degeneracy *= 2;
+
+       default:
+         break;
+     }
+
+   }
+
+   opt.num_hl_states = opt.num_el_states = 0;
+
+   if (singleband != 'c')
+   {
+     opt.num_hl_states = get_option("number_of_eigenstates", 0);
+     opt.num_hl_states = sol_opt.get_option("number_of_eigenstates", opt.num_hl_states);
+     opt.num_hl_states = get_option("num_valence_eigenvalues", opt.num_hl_states);
+     opt.num_hl_states = sol_opt.get_option("num_valence_eigenvalues", opt.num_hl_states);
+     opt.num_hl_states = get_option("num_hole_states", opt.num_hl_states);
+     opt.num_hl_states = sol_opt.get_option("num_hole_states", opt.num_hl_states);
+   }
+
+   if (singleband != 'v')
+   {
+     opt.num_el_states = get_option("number_of_eigenstates", 0);
+     opt.num_el_states = sol_opt.get_option("number_of_eigenstates", opt.num_el_states);
+     opt.num_el_states = get_option("num_conduction_eigenvalues", opt.num_el_states);
+     opt.num_el_states = sol_opt.get_option("num_conduction_eigenvalues", opt.num_el_states);
+     opt.num_el_states = get_option("num_electron_states", opt.num_el_states);
+     opt.num_el_states = sol_opt.get_option("num_electron_states", opt.num_el_states);
+   }
+
+   solver_opt.number_of_eigenstates = opt.num_el_states + opt.num_hl_states;
+
+   if (solver_opt.number_of_eigenstates == 0)
+   {
+     throw InitFailedException("In " +  get_name() + ": you must give at least "
+         " one of 'num_electron_states' or 'num_hole_states'");
+   }
+
+   if (singleband && (singleband != 'b'))
+   {
+     if ((opt.num_hl_states > 0) && (opt.num_el_states > 0))
+       throw InitFailedException("In " +  get_name() + ": you cannot ask for both hole and "
+           " electron states when using 'single_band' model.");
+   }
+
+   //possible user override
+   opt.degeneracy = get_option("degeneracy", opt.degeneracy);
+
+   // for degeneracy = 1 we assure that number of states is even,
+   // so we take both spin states
+   if ((opt.degeneracy == 1) && (opt.num_el_states % 2 == 1))
+   {
+     opt.num_el_states += 1;
+     Messages::warning("Number of electron eigenstates increased by 1 because of spin pairing");
+   }
+   if ((opt.degeneracy == 1) && (opt.num_hl_states % 2 == 1))
+   {
+     opt.num_hl_states += 1;
+     Messages::warning("Number of hole eigenstates increased by 1 because of spin pairing");
+   }
+
+
+   // check the quadrature rule
+   {
+     std::string qrule = get_option("quadrature_rule", "gauss");
+     if (qrule == "gauss")
+       _quadrature_type = libMesh::QGAUSS;
+     else if (qrule == "trapez")
+     {
+       _quadrature_type = libMesh::QTRAP;
+     }
+     else
+       throw InitFailedException("Unknown quadrature rule");
+   }
+   std::string parola;
+
+}
 
 
 
