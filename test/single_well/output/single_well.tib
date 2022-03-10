@@ -1,0 +1,199 @@
+Device
+{
+
+  meshfile = single_well.msh
+  mesh_units = 1e-9
+
+  Region well
+  {
+    material = GaAs
+
+    Doping
+    {
+      density = 1e15
+      type = donor
+      level = 0.025
+     
+    }
+
+  }
+
+  Region  buffer1
+  {
+    mesh_regions  = ( barrier1_a,barrier1_q)
+    material = AlGaAs
+    x = 0.3
+
+    Doping
+    {
+      density = 1e17
+      type = donor
+      level = 0.025
+     
+    }
+ 
+  }
+  
+  
+
+  Region  buffer2
+  {
+    mesh_regions  = (barrier2_a, barrier2_q  )
+    material = AlGaAs
+    x = 0.3
+
+    Doping
+    {
+      density = 1e17
+      type = donor
+      level = 0.025
+     
+    }
+ 
+  }
+
+  Cluster Quantum_1
+  {
+    regions = (well ,barrier1_q, barrier2_q   )
+  }
+
+  Cluster Quantum_MQW
+  {
+    regions = (well ,barrier1_q, barrier2_q   )
+  }
+
+
+}
+
+
+
+
+
+Module  driftdiffusion
+{ 
+ 
+  name = dd
+
+  regions = all
+  coupling = poisson
+
+
+  plot = (Polarization, Ec, Ev, eQFermi, hQFermi, ElField, eDensity, hDensity,
+          CurrentDensity, ContactCurrent, eMobility, hMobility)
+
+  Physics
+  {
+
+    valence_band
+    {
+      density_of_states bulk_kp
+      {
+      }
+    }
+    
+    conduction_band
+    {
+      density_of_states quantum
+      {
+        quantum_simulation = quantum_el
+        barrier_regions = (buffer1, buffer2)
+
+        classical_DOS bulk_kp 
+        {
+        }
+      }
+    }
+
+
+    recombination srh {}
+
+   
+    mobility doping_dependent {}
+
+  }
+
+}
+
+
+
+
+Module efaschroedinger
+{
+
+  name = quantum_el
+  regions = Quantum_1
+
+  plot = (ProbabilityDensity, EigenEnergy, QuantumDensity)
+
+  num_electron_states = 22
+  poisson_simulation = dd
+  strain_simulation = strain 
+
+
+  Physics
+  {
+    model = conduction_band    
+  }
+
+}
+
+
+Module efaschroedinger
+{
+
+  name = MQW
+  regions = Quantum_MQW
+
+  plot = (ProbabilityDensity, EigenEnergy, QuantumDensity)
+
+  num_electron_states = 22
+  poisson_simulation = dd
+  strain_simulation = strain 
+
+
+  Physics
+  {
+    model = conduction_band    
+  }
+
+}
+
+Module lcqo
+{
+
+  regions = Quantum_MQW
+
+
+
+  single_dot_hamiltonian = quantum_el
+  total_system_hamiltonian = MQW
+
+  plot = (ProbabilityDensity, EigenEnergy, QuantumDensity)
+
+  number_of_dots = 1
+  distance_between_dots = 0
+
+  }
+
+Module selfconsistent
+{
+
+  name =  poisson_schroedinger
+  solve = (quantum_el, dd)
+  max_iterations = 10
+  absolute_tolerance = 1e-3
+  relative_tolerance = 1e-8
+  monitor = true
+  #xmonitor = true
+}
+
+
+Simulation
+{
+  
+  temperature = 300
+  solve = (dd, quantum_el, lcqo)
+  resultpath = output
+
+
+}

@@ -1,0 +1,1232 @@
+
+Log start: Tue Mar  8 17:31:46 2022
+
+
+Writing log to output/10_well_with_overlap.log.0
+tiberCAD release 3.2.0 (rev. 5225, x86_64-linux)
+
+Input file: 10_well_with_overlap.tib
+
+Initialize global simulation options
+  Simulation temperature: 300 K
+  Database search path  : /home/miesu/TiberCAD/trunk/materials
+  Log file              : output/10_well_with_overlap.log.0
+
+Setup mesh
+  Reading mesh file '10_well_with_overlap.msh ...
+    mesh reading time: 0h 0m 0.0036s
+    mesh preparation time: 0h 0m 0.0017s
+    bd_regions preparation time: 0h 0m 8.1e-06s
+
+    mesh units          : 1e-09 m
+    mesh dimension      :       1
+    number of nodes     :    1710
+    number of elements  :    1709
+    number of subdomains:      30
+    number of boundaries:       0
+
+Create materials ...
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier1' (mesh regions 1)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well1' (mesh regions 2)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier2' (mesh regions 3)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier3' (mesh regions 4)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well2' (mesh regions 5)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier4' (mesh regions 6)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier5' (mesh regions 7)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well3' (mesh regions 8)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier6' (mesh regions 9)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier7' (mesh regions 10)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well4' (mesh regions 11)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier8' (mesh regions 12)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier9' (mesh regions 13)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well5' (mesh regions 14)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier10' (mesh regions 15)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier11' (mesh regions 16)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well6' (mesh regions 17)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier12' (mesh regions 18)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier13' (mesh regions 19)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well7' (mesh regions 20)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier14' (mesh regions 21)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier15' (mesh regions 22)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well8' (mesh regions 23)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier16' (mesh regions 24)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier17' (mesh regions 25)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well9' (mesh regions 26)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier18' (mesh regions 27)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier19' (mesh regions 28)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  Added material GaAs for region 'well10' (mesh regions 29)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/GaAs.dat)
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+  AlGaAs is an alloy with components AlAs and GaAs and molar fraction of AlAs 0.3.
+  Added material AlGaAs for region 'barrier20' (mesh regions 30)
+    (using datafile /home/miesu/TiberCAD/trunk/materials/AlGaAs.dat)
+    alloy with 0.3 AlAs, 0.7 GaAs
+    x growth direction : (1,0,0)
+    y growth direction : (0,1,0)
+    z growth direction : (0,0,1)
+Creation of materials done.
+
+Setting up Cluster 'QW_1' containing regions 1, 2, 3
+
+Setting up Cluster 'QW_2' containing regions 4, 5, 6
+
+Setting up Cluster 'QW_3' containing regions 7, 8, 9
+
+Setting up Cluster 'QW_4' containing regions 10, 11, 12
+
+Setting up Cluster 'QW_5' containing regions 13, 14, 15
+
+Setting up Cluster 'QW_6' containing regions 16, 17, 18
+
+Setting up Cluster 'QW_7' containing regions 19, 20, 21
+
+Setting up Cluster 'QW_8' containing regions 22, 23, 24
+
+Setting up Cluster 'QW_9' containing regions 25, 26, 27
+
+Setting up Cluster 'QW_10' containing regions 28, 29, 30
+
+Setting up Cluster 'Quantum_MQW' containing regions 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+
+Setting up simulation of type 'driftdiffusion' ...
+  (using /home/miesu/TiberCAD/trunk/x86_64-linux/modules/driftdiffusion/driftdiffusion.so)
+Creating bulk models... 
+  Region: barrier1
+  (using /home/miesu/TiberCAD/trunk/x86_64-linux/modules/driftdiffusion/ddbulk_default.so)
+  Region: well1
+  Region: barrier2
+  Region: barrier3
+  Region: well2
+  Region: barrier4
+  Region: barrier5
+  Region: well3
+  Region: barrier6
+  Region: barrier7
+  Region: well4
+  Region: barrier8
+  Region: barrier9
+  Region: well5
+  Region: barrier10
+  Region: barrier11
+  Region: well6
+  Region: barrier12
+  Region: barrier13
+  Region: well7
+  Region: barrier14
+  Region: barrier15
+  Region: well8
+  Region: barrier16
+  Region: barrier17
+  Region: well9
+  Region: barrier18
+  Region: barrier19
+  Region: well10
+  Region: barrier20
+(using /home/miesu/TiberCAD/trunk/x86_64-linux/modules/driftdiffusion/recombination_srh.so)
+
+Setting up simulation of type 'efaschroedinger' ...
+Creating bulk models... 
+  Region: barrier1
+  Region: well1
+  Region: barrier2
+
+Setting up simulation of type 'efaschroedinger' ...
+Creating bulk models... 
+  Region: barrier1
+  Region: well1
+  Region: barrier2
+  Region: barrier3
+  Region: well2
+  Region: barrier4
+  Region: barrier5
+  Region: well3
+  Region: barrier6
+  Region: barrier7
+  Region: well4
+  Region: barrier8
+  Region: barrier9
+  Region: well5
+  Region: barrier10
+  Region: barrier11
+  Region: well6
+  Region: barrier12
+  Region: barrier13
+  Region: well7
+  Region: barrier14
+  Region: barrier15
+  Region: well8
+  Region: barrier16
+  Region: barrier17
+  Region: well9
+  Region: barrier18
+  Region: barrier19
+  Region: well10
+  Region: barrier20
+
+Setting up simulation of type 'lcqo' ...
+  (using /home/miesu/TiberCAD/trunk/x86_64-linux/modules/lcqo/lcqo.so)
+Creating bulk models... 
+  Region: barrier1
+  Region: well1
+  Region: barrier2
+  Region: barrier3
+  Region: well2
+  Region: barrier4
+  Region: barrier5
+  Region: well3
+  Region: barrier6
+  Region: barrier7
+  Region: well4
+  Region: barrier8
+  Region: barrier9
+  Region: well5
+  Region: barrier10
+  Region: barrier11
+  Region: well6
+  Region: barrier12
+  Region: barrier13
+  Region: well7
+  Region: barrier14
+  Region: barrier15
+  Region: well8
+  Region: barrier16
+  Region: barrier17
+  Region: well9
+  Region: barrier18
+  Region: barrier19
+  Region: well10
+  Region: barrier20
+
+Setting up simulation of type 'selfconsistent' ...
+
+Setting up bulk models ...
+  (using /home/miesu/TiberCAD/trunk/x86_64-linux/modules/driftdiffusion/band_properties.so)
+  (using /home/miesu/TiberCAD/trunk/x86_64-linux/modules/permittivity_constant.so)
+  (using /home/miesu/TiberCAD/trunk/x86_64-linux/modules/driftdiffusion/mobility_doping_dependent.so)
+    (using /home/miesu/TiberCAD/trunk/x86_64-linux/modules/density_of_states_quantum.so)
+      (using /home/miesu/TiberCAD/trunk/x86_64-linux/modules/density_of_states_bulk_kp.so)
+
+Setting up lower dimensional (boundary) models ...
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Simulation options for dd (driftdiffusion)
+MPI: rank 0 of communicator with size 1
+MPI: solver parallelized on 1 processes
+
+Available solution variables:
+------------------------------------------------------------------
+Name                     Units          Type      Association Plot
+------------------------------------------------------------------
+Ec                       eV             real      nodal       y
+Ev                       eV             real      nodal       y
+eQFermi                  eV             real      nodal       y
+hQFermi                  eV             real      nodal       y
+ElPotential              V              real      nodal       n
+Ec0                      eV             real      nodal       n
+Ev0                      eV             real      nodal       n
+Eg                       eV             real      nodal       n
+ConductionBands          eV             n-tuple   cell        n
+ValenceBands             eV             n-tuple   cell        n
+eDensity                 cm^-3          real      nodal       y
+hDensity                 cm^-3          real      nodal       y
+ChargeDensity            cm^-3          real      nodal       n
+eMobility                cm^2/(V*s)     real      nodal       y
+hMobility                cm^2/(V*s)     real      nodal       y
+eConductivity            S/cm           real      nodal       n
+hConductivity            S/cm           real      nodal       n
+ElField                  V/cm           vector    cell        y
+Polarization             C/m^2          vector    cell        y
+Displacement             C/m^2          vector    cell        n
+CurrentDensity           A/cm^2         vector    cell        y
+eCurrentDensity          A/cm^2         vector    cell        n
+hCurrentDensity          A/cm^2         vector    cell        n
+IonizedDonors            cm^-3          real      nodal       n
+IonizedAcceptors         cm^-3          real      nodal       n
+IonizedElectronTraps     cm^-3          real      nodal       n
+IonizedHoleTraps         cm^-3          real      nodal       n
+eThElPower               eV/K           real      nodal       n
+hThElPower               eV/K           real      nodal       n
+eJoule                   W/cm^3         real      nodal       n
+hJoule                   W/cm^3         real      nodal       n
+ePowerFlux               W/cm^2         vector    nodal       n
+hPowerFlux               W/cm^2         vector    nodal       n
+ePeltier                 W/cm^3         real      nodal       n
+hPeltier                 W/cm^3         real      nodal       n
+RecombHeat               W/cm^3         real      nodal       n
+IQE                                     real      none        n
+ArtificialDiffusion                     real      nodal       n
+eNetRecombination        1/(s*cm^3)     real      nodal       n
+eSRHRecombination        1/(s*cm^3)     real      nodal       n
+hNetRecombination        1/(s*cm^3)     real      nodal       n
+hSRHRecombination        1/(s*cm^3)     real      nodal       n
+RegionIDs                               real      cell        n
+------------------------------------------------------------------
+
+Output directory      : output
+Output file format    : grace
+Output file basename  : dd
+
+
+solving for : poisson 
+using local scaling
+
+# Region barrier1, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier10, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier11, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier12, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier13, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier14, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier15, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier16, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier17, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier18, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier19, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier2, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier20, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier3, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier4, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier5, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier6, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier7, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier8, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region barrier9, AlGaAs (x = 0.3)
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.937648  0.953058  0.953058  0.953058  0.953058  1.00326  1.00326  1.00326
+      eff. mass :  0.0919  0.254593  0.254593  0.254593  0.254593  0.395547  0.395547  0.395547
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.937648, Nc = 6.99111e+17 cm^-3
+    m_dos = 0.0919, v_th = 3.85266e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.2817  -0.959  -0.959
+      eff. mass :  0.166278  0.10823  0.733232
+      degeneracy:  2  2  2
+    Ev = -0.959, Nv = 1.70148e+18 cm^-3
+    m_dos = 0.733232, v_th = 1.36395e+07 cm/s
+  Eg = 1.89665, Ef0 = 0.802884, ni = 2020.24
+
+# Region well1, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+# Region well10, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+# Region well2, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+# Region well3, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+# Region well4, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+# Region well5, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+# Region well6, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+# Region well7, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+# Region well8, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+# Region well9, GaAs
+  Conduction band:
+    DOS: quantum
+      classical DOS: bulk_kp
+      band edge :  0.622482  0.906964  0.906964  0.906964  0.906964  1.09886  1.09886  1.09886
+      eff. mass :  0.067  0.221054  0.221054  0.221054  0.221054  0.4097  0.4097  0.4097
+      degeneracy:  2  4  4  4  4  4  4  4
+    Ec = 0.622482, Nc = 4.35196e+17 cm^-3
+    m_dos = 0.067, v_th = 4.51213e+07 cm/s
+  Valence band:
+    DOS: bulk_kp
+      band edge :  -1.141  -0.8  -0.8
+      eff. mass :  0.143266  0.0913621  0.727811
+      degeneracy:  2  2  2
+    Ev = -0.8, Nv = 1.36078e+18 cm^-3
+    m_dos = 0.727811, v_th = 1.36902e+07 cm/s
+  Eg = 1.42248, Ef0 = 0.465104, ni = 2.99765e+06
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Simulation options for quantum_el (efaschroedinger)
+MPI: rank 0 of communicator with size 1
+MPI: solver parallelized on 1 processes
+Symmetry of k space: rectangular
+k-space initialized
+
+Available solution variables:
+------------------------------------------------------------------
+Name                     Units          Type      Association Plot
+------------------------------------------------------------------
+ProbabilityDensity       1/cm           n-tuple   nodal       y
+EigenEnergy              eV             n-tuple   none        y
+Occupation                              n-tuple   none        n
+EigenEnergyOnMesh        eV             n-tuple   nodal       n
+eDensity                 1/cm^3         real      nodal       y
+hDensity                 1/cm^3         real      nodal       y
+EnvelopeFunctions                       n-tuple   nodal       n
+RegionIDs                               real      cell        n
+------------------------------------------------------------------
+
+Output directory      : output
+Output file format    : grace
+Output file basename  : quantum_el
+
+Number of bands: 1
+Degeneracy: 2
+
+
+# Region barrier1, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier2, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region well1, GaAs
+  single-band  Mass = 0.067
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Simulation options for MQW (efaschroedinger)
+MPI: rank 0 of communicator with size 1
+MPI: solver parallelized on 1 processes
+Symmetry of k space: rectangular
+k-space initialized
+
+Available solution variables:
+------------------------------------------------------------------
+Name                     Units          Type      Association Plot
+------------------------------------------------------------------
+ProbabilityDensity       1/cm           n-tuple   nodal       y
+EigenEnergy              eV             n-tuple   none        y
+Occupation                              n-tuple   none        n
+EigenEnergyOnMesh        eV             n-tuple   nodal       n
+eDensity                 1/cm^3         real      nodal       y
+hDensity                 1/cm^3         real      nodal       y
+EnvelopeFunctions                       n-tuple   nodal       n
+RegionIDs                               real      cell        n
+------------------------------------------------------------------
+
+Output directory      : output
+Output file format    : grace
+Output file basename  : MQW
+
+Number of bands: 1
+Degeneracy: 2
+
+
+# Region barrier1, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier10, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier11, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier12, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier13, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier14, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier15, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier16, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier17, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier18, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier19, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier2, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier20, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier3, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier4, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier5, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier6, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier7, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier8, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region barrier9, AlGaAs (x = 0.3)
+  single-band  Mass = 0.0919
+
+# Region well1, GaAs
+  single-band  Mass = 0.067
+
+# Region well10, GaAs
+  single-band  Mass = 0.067
+
+# Region well2, GaAs
+  single-band  Mass = 0.067
+
+# Region well3, GaAs
+  single-band  Mass = 0.067
+
+# Region well4, GaAs
+  single-band  Mass = 0.067
+
+# Region well5, GaAs
+  single-band  Mass = 0.067
+
+# Region well6, GaAs
+  single-band  Mass = 0.067
+
+# Region well7, GaAs
+  single-band  Mass = 0.067
+
+# Region well8, GaAs
+  single-band  Mass = 0.067
+
+# Region well9, GaAs
+  single-band  Mass = 0.067
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Simulation options for lcqo (lcqo)
+MPI: rank 0 of communicator with size 1
+MPI: solver parallelized on 1 processes
+
+Output directory      : output
+Output file format    : grace
+Output file basename  : lcqo
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Simulation options for poisson_schroedinger (selfconsistent)
+MPI: rank 0 of communicator with size 1
+MPI: solver parallelized on 1 processes
+
+Output directory      : output
+Output file format    : grace
+Output file basename  : poisson_schroedinger
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+We solve: dd quantum_el lcqo 
+
+>>>>----------------------------------- (dd) -----------------------------------
+  Setting max_iterations for nonlinear solver to 150
+  Solving equilibrium
+  it 1, |du| = 12.8228, |r| = 0.14769  alpha = 1
+  it 2, |du| = 3.59882, |r| = 0.0377384  alpha = 1
+  it 3, |du| = 1.70224, |r| = 0.0135483  alpha = 1
+  it 4, |du| = 0.649215, |r| = 0.00289149  alpha = 1
+  it 5, |du| = 0.150997, |r| = 9.07567e-05  alpha = 1
+  it 6, |du| = 0.00464448, |r| = 7.29668e-08  alpha = 1
+
+  iterations: 7, |du| = 3.72432e-06, |r| = 1.01283e-13
+  Equilibrium done
+
+Solve time: 0h 0m 1s
+<<<<----------------------------------------------------------------------------
+
+>>>>------------------------------- (quantum_el) -------------------------------
+  Maximum of Ev (eV) :-1.44698
+  Minimum of Ec (eV) :-0.0373042
+  (EFA) Estimated guess (eV): -0.178272
+  (EFA) Calculating quantum density
+    Solving for k1 = ( 0.00000 0.00000 0.188000 )
+    Solving for k2 = ( 0.00000 0.188000 0.00000 )
+    Solving for k3 = ( 0.00000 0.188000 0.188000 )
+    Solving for k0 = ( 0.00000 0.00000 0.00000 )
+
+Solve time: 0h 0m 0.47s
+<<<<----------------------------------------------------------------------------
+
+>>>>---------------------------------- (lcqo) ----------------------------------
+  converged eigenenergies (230):
+    0.00508917 0.00510149 0.0069749 0.006975 0.00700806 0.00700807 0.00700861 0.00700863 
+    0.00700868 0.00700874 0.0971824 0.0972163 0.0992498 0.0992499 0.0992858 0.0992858 
+    0.0992862 0.0992864 0.0992866 0.0992867 0.163893 0.163893 0.180695 0.180696 
+    0.189973 0.189973 0.190435 0.190435 0.190443 0.190443 0.190443 0.190443 
+    0.190443 0.19824 0.19824 0.200388 0.200389 0.200864 0.200864 0.200872 
+    0.200872 0.200872 0.200872 0.200873 0.210899 0.210906 0.211386 0.211386 
+    0.211391 0.211393 0.211396 0.2114 0.211402 0.216344 0.216345 0.221461 
+    0.221467 0.221963 0.221963 0.221969 0.22197 0.221972 0.221974 0.221976 
+    0.232155 0.232192 0.232607 0.232632 0.23267 0.232717 0.232766 0.232809 
+    0.232839 0.234294 0.234296 0.238154 0.238154 0.238987 0.239062 0.239179 
+    0.239331 0.239504 0.239682 0.239843 0.239958 0.243708 0.243748 0.243919 
+    0.244156 0.244433 0.244721 0.244988 0.245209 0.245354 0.254476 0.25451 
+    0.254932 0.255077 0.25527 0.255469 0.255633 0.255769 0.255911 0.25606 
+    0.256171 0.267449 0.267519 0.267704 0.267989 0.268339 0.268716 0.269078 
+    0.269381 0.269583 0.276714 0.276753 0.282099 0.282255 0.282524 0.282895 
+    0.283344 0.283835 0.284325 0.284757 0.285061 0.29482 0.2952 0.295835 
+    0.296682 0.297673 0.29873 0.299771 0.30072 0.301485 0.301987 0.302564 
+    0.312185 0.312578 0.313171 0.31389 0.314675 0.315468 0.31621 0.31683 
+    0.317247 0.328425 0.329333 0.334023 0.334549 0.335326 0.336263 0.337287 
+    0.338334 0.33933 0.340172 0.340745 0.357163 0.357482 0.358435 0.359338 
+    0.360535 0.361946 0.363523 0.365211 0.36691 0.368408 0.369344 0.381798 
+    0.384056 0.38725 0.391094 0.395396 0.399893 0.404148 0.407579 0.409678 
+    0.422359 0.425384 0.426251 0.427563 0.429217 0.431114 0.433132 0.43508 
+    0.436618 0.449326 0.454546 0.45725 0.46122 0.466256 0.472189 0.478535 
+    0.484288 0.488254 0.543738 0.552646 0.553237 0.554592 0.557069 0.561173 
+    0.567285 0.574901 0.581757 0.629509 0.635259 0.63555 0.635995 0.636537 
+    0.637104 0.637625 0.638044 0.638313 0.868769 0.878126 0.881097 0.887313 
+    0.89756 0.913111 0.935168 0.962777 0.988907 1.84694 1.8863 1.88868 
+    1.88876 1.8908 1.89396 1.89738 1.90033 1.9023 
+
+
+Solve time: 0h 4m 51s
+<<<<----------------------------------------------------------------------------
+
+Total solve time: 0h 4m 53s
+Simulation finished.
+
+0 warnings during run
+0 errors detected
+
+
+Log end: Tue Mar  8 17:36:40 2022
+
+
