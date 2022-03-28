@@ -166,6 +166,13 @@ void LinearCombinationOfOrbitals::do_solve_for_kpoint(const Point& kpoint)
 
   tt.reset();
 
+  //inizialize local solution containers
+  initialize_solution_container(_H_lcqo_size);
+
+  //inizialize total system solution containers
+  _total_system_hamiltonian->initialize_solution_container
+                                            (_H_lcqo_size);
+
   solve_eigen_value_problem(_H_lcqo_size);  //solve generalized eigenvalue problem
 
   std::cerr<<"\n\n"<<__LINE__<<" "<<__FILE__<<" SOLVE time: "<<tt.elapsed_string()<<"\n\n";
@@ -195,6 +202,7 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
   _H_lcqo_imag->init(m , m , m , m, m);
   _S_lcqo_real->init(m , m , m , m, m);
   _S_lcqo_imag->init(m , m , m , m, m);
+
 
 
   size_t total_sys_dim = _total_system_hamiltonian->get_H_dim();
@@ -257,8 +265,9 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
           //exact position
           size_t row_index = 0;
           size_t column_index = 0;
-          row_index = shift_i * basis_size + state_i;
-          column_index = shift_j * basis_size + state_j;
+          row_index = (shift_i * basis_size) + state_i;
+          column_index = (shift_j * basis_size) + state_j;
+
 
           _H_lcqo_real->set(row_index , column_index , current_H_element.real());
           _H_lcqo_imag->set(row_index , column_index , current_H_element.imag());
@@ -290,7 +299,6 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
 
   _S_lcqo_real->print_matlab("S_lcqo_real.m");
   _S_lcqo_imag->print_matlab("S_lcqo_imag.m");
-
 }
 
 
@@ -647,12 +655,6 @@ bool LinearCombinationOfOrbitals::read_SLEPC_solution(void)
   std::vector<EigenvalueProblem::eigen_state>  ev(number_of_converged_solutions);
   double shift = EigenSolver::get_shift() * Constants::Hartree;
 
-  //inizialize local solution containers
-  initialize_solution_container(number_of_converged_solutions);
-
-  //inizialize total system solution containers
-  _total_system_hamiltonian->initialize_solution_container
-                           (number_of_converged_solutions);
 
   //take a reference to the container of the eigenvalue problem solution
   std::vector<eigen_problem_solution>& solution = _solution;
@@ -668,11 +670,6 @@ bool LinearCombinationOfOrbitals::read_SLEPC_solution(void)
                                      Constants::Hartree; // + shift;
 
     ev[ind].index = ind;
-
-    if (ev[ind].energy > shift)
-      ev[ind].particle = "el";
-    else
-      ev[ind].particle = "hl";
   }
 
   // sorting of the solutions
@@ -707,9 +704,6 @@ bool LinearCombinationOfOrbitals::read_SLEPC_solution(void)
 
     solution[i].eigen_energy = ev[i].energy;
     total_system_solution[i].eigen_energy = ev[i].energy;
-
-    solution[i].particle = ev[i].particle;
-    total_system_solution[i].particle = ev[i].particle;
 
     solution[i].statistics = "Fermi";
     total_system_solution[i].statistics = "Fermi";
