@@ -6,6 +6,7 @@
 #include "SimulationOptions.h"
 
 #include <petsc_matrix.h>
+#include <petsc_vector.h>
 
 #include "Messages.h"
 #include <signal.h>
@@ -42,6 +43,9 @@ LinearCombinationOfOrbitals::~LinearCombinationOfOrbitals(void)
   delete(_H_lcqo_imag);
   delete(_S_lcqo_real);
   delete(_S_lcqo_imag);
+  delete(_total_basis_wave_function_b_real);
+  delete(_total_basis_wave_function_b_imag);
+
 }
 
 
@@ -55,7 +59,9 @@ LinearCombinationOfOrbitals::LinearCombinationOfOrbitals(
    _S_lcqo_real(nullptr),
    _S_lcqo_imag(nullptr),
    _single_dot_hamiltonian(nullptr),
-   _total_system_hamiltonian(nullptr)
+   _total_system_hamiltonian(nullptr),
+   _total_basis_wave_function_b_real(nullptr),
+   _total_basis_wave_function_b_imag(nullptr)
 {
   _H_lcqo_size = 0;
 }
@@ -104,24 +110,26 @@ void LinearCombinationOfOrbitals::do_init()
 
 
   if (_H_lcqo_real == nullptr)
-  {
     _H_lcqo_real = new libMesh::PetscMatrix<double>(get_solver_communicator());
-  }
+
 
   if (_H_lcqo_imag == nullptr)
-  {
     _H_lcqo_imag = new libMesh::PetscMatrix<double>(get_solver_communicator());
-  }
+
 
   if (_S_lcqo_real == nullptr)
-  {
     _S_lcqo_real = new libMesh::PetscMatrix<double>(get_solver_communicator());
-  }
+
 
   if (_S_lcqo_imag == nullptr)
-  {
     _S_lcqo_imag = new libMesh::PetscMatrix<double>(get_solver_communicator());
-  }
+
+
+  if (_total_basis_wave_function_b_real == nullptr)
+    _total_basis_wave_function_b_real = new libMesh::PetscVector<libMesh::Complex>(get_solver_communicator());
+
+  if (_total_basis_wave_function_b_imag == nullptr)
+    _total_basis_wave_function_b_imag = new libMesh::PetscVector<libMesh::Complex>(get_solver_communicator());
 
 
   int shift_size = 0;
@@ -204,8 +212,11 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
   _S_lcqo_imag->init(m , m , m , m, m);
 
 
-
   size_t total_sys_dim = _total_system_hamiltonian->get_H_dim();
+
+  _total_basis_wave_function_b_real->init(total_sys_dim, total_sys_dim);
+  _total_basis_wave_function_b_imag->init(total_sys_dim, total_sys_dim);
+
 
   //define the total system wave functions with the proper dimension
   std::vector<libMesh::Complex> total_basis_wave_function_a(total_sys_dim);
@@ -236,8 +247,9 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
 
         for (int state_j = 0; state_j < basis_size; ++state_j)
         {
-          std::fill(total_basis_wave_function_b.begin(),
-              total_basis_wave_function_b.end(), 0);
+          _total_basis_wave_function_b_real->zero();
+          _total_basis_wave_function_b_imag->zero();
+
 
           size_t sd_len_j = single_dot_sol[state_j].eigen_vector.size();
 
@@ -245,8 +257,9 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
           {
             unsigned int shift_xj = _shift_x[shift_j];
 
-            total_basis_wave_function_b[shift_xj + pos] =
-                single_dot_sol[state_j].eigen_vector[pos];
+            _total_basis_wave_function_b_real->set(shift_xj + pos, single_dot_sol[state_j].eigen_vector[pos].real());
+            _total_basis_wave_function_b_imag->set(shift_xj + pos, single_dot_sol[state_j].eigen_vector[pos].imag());
+
           }
 
           Utils::Timer tt1;
@@ -293,6 +306,9 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
 
   _S_lcqo_real->close();
   _S_lcqo_imag->close();
+
+  _total_basis_wave_function_b_real->close();
+  _total_basis_wave_function_b_imag->close();
 
   _H_lcqo_real->print_matlab("H_lcqo_real.m");
   _H_lcqo_imag->print_matlab("H_lcqo_imag.m");

@@ -11,6 +11,7 @@
 #include "EigenvalueProblem.h"
 #include "EigenSolver.h"
 
+#include <petsc_vector.h>
 
 
 //! Class to calculate electronic properties of large systems of coupled quantum dots-wells
@@ -154,6 +155,14 @@ class LinearCombinationOfOrbitals : public EigenvalueProblem
 
     //! pointer to the real part of S matrix
     libMesh::SparseMatrix<double>* _S_lcqo_imag;
+
+
+
+    libMesh::PetscVector<libMesh::Complex>* _total_basis_wave_function_b_real;
+
+
+
+    libMesh::PetscVector<libMesh::Complex>* _total_basis_wave_function_b_imag;
 
 
 
