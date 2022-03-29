@@ -6,6 +6,7 @@
 #include "SimulationOptions.h"
 
 #include <petsc_matrix.h>
+#include <petsc_vector.h>
 
 #include "Messages.h"
 #include <signal.h>
@@ -42,6 +43,9 @@ LinearCombinationOfOrbitals::~LinearCombinationOfOrbitals(void)
   delete(_H_lcqo_imag);
   delete(_S_lcqo_real);
   delete(_S_lcqo_imag);
+  delete(_total_basis_wave_function_b_real);
+  delete(_total_basis_wave_function_b_imag);
+
 }
 
 
@@ -55,7 +59,9 @@ LinearCombinationOfOrbitals::LinearCombinationOfOrbitals(
    _S_lcqo_real(nullptr),
    _S_lcqo_imag(nullptr),
    _single_dot_hamiltonian(nullptr),
-   _total_system_hamiltonian(nullptr)
+   _total_system_hamiltonian(nullptr),
+   _total_basis_wave_function_b_real(nullptr),
+   _total_basis_wave_function_b_imag(nullptr)
 {
   _H_lcqo_size = 0;
 }
@@ -104,24 +110,26 @@ void LinearCombinationOfOrbitals::do_init()
 
 
   if (_H_lcqo_real == nullptr)
-  {
     _H_lcqo_real = new libMesh::PetscMatrix<double>(get_solver_communicator());
-  }
+
 
   if (_H_lcqo_imag == nullptr)
-  {
     _H_lcqo_imag = new libMesh::PetscMatrix<double>(get_solver_communicator());
-  }
+
 
   if (_S_lcqo_real == nullptr)
-  {
     _S_lcqo_real = new libMesh::PetscMatrix<double>(get_solver_communicator());
-  }
+
 
   if (_S_lcqo_imag == nullptr)
-  {
     _S_lcqo_imag = new libMesh::PetscMatrix<double>(get_solver_communicator());
-  }
+
+
+  if (_total_basis_wave_function_b_real == nullptr)
+    _total_basis_wave_function_b_real = new libMesh::PetscVector<libMesh::Complex>(get_solver_communicator());
+
+  if (_total_basis_wave_function_b_imag == nullptr)
+    _total_basis_wave_function_b_imag = new libMesh::PetscVector<libMesh::Complex>(get_solver_communicator());
 
 
   int shift_size = 0;
@@ -166,6 +174,13 @@ void LinearCombinationOfOrbitals::do_solve_for_kpoint(const Point& kpoint)
 
   tt.reset();
 
+  //inizialize local solution containers
+  initialize_solution_container(_H_lcqo_size);
+
+  //inizialize total system solution containers
+  _total_system_hamiltonian->initialize_solution_container
+                                            (_H_lcqo_size);
+
   solve_eigen_value_problem(_H_lcqo_size);  //solve generalized eigenvalue problem
 
   std::cerr<<"\n\n"<<__LINE__<<" "<<__FILE__<<" SOLVE time: "<<tt.elapsed_string()<<"\n\n";
@@ -199,6 +214,10 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
 
   size_t total_sys_dim = _total_system_hamiltonian->get_H_dim();
 
+  _total_basis_wave_function_b_real->init(total_sys_dim, total_sys_dim);
+  _total_basis_wave_function_b_imag->init(total_sys_dim, total_sys_dim);
+
+
   //define the total system wave functions with the proper dimension
   std::vector<libMesh::Complex> total_basis_wave_function_a(total_sys_dim);
   std::vector<libMesh::Complex> total_basis_wave_function_b(total_sys_dim);
@@ -228,8 +247,9 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
 
         for (int state_j = 0; state_j < basis_size; ++state_j)
         {
-          std::fill(total_basis_wave_function_b.begin(),
-              total_basis_wave_function_b.end(), 0);
+          _total_basis_wave_function_b_real->zero();
+          _total_basis_wave_function_b_imag->zero();
+
 
           size_t sd_len_j = single_dot_sol[state_j].eigen_vector.size();
 
@@ -237,8 +257,9 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
           {
             unsigned int shift_xj = _shift_x[shift_j];
 
-            total_basis_wave_function_b[shift_xj + pos] =
-                single_dot_sol[state_j].eigen_vector[pos];
+            _total_basis_wave_function_b_real->set(shift_xj + pos, single_dot_sol[state_j].eigen_vector[pos].real());
+            _total_basis_wave_function_b_imag->set(shift_xj + pos, single_dot_sol[state_j].eigen_vector[pos].imag());
+
           }
 
           Utils::Timer tt1;
@@ -257,8 +278,9 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
           //exact position
           size_t row_index = 0;
           size_t column_index = 0;
-          row_index = shift_i * basis_size + state_i;
-          column_index = shift_j * basis_size + state_j;
+          row_index = (shift_i * basis_size) + state_i;
+          column_index = (shift_j * basis_size) + state_j;
+
 
           _H_lcqo_real->set(row_index , column_index , current_H_element.real());
           _H_lcqo_imag->set(row_index , column_index , current_H_element.imag());
@@ -285,12 +307,14 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
   _S_lcqo_real->close();
   _S_lcqo_imag->close();
 
+  _total_basis_wave_function_b_real->close();
+  _total_basis_wave_function_b_imag->close();
+
   _H_lcqo_real->print_matlab("H_lcqo_real.m");
   _H_lcqo_imag->print_matlab("H_lcqo_imag.m");
 
   _S_lcqo_real->print_matlab("S_lcqo_real.m");
   _S_lcqo_imag->print_matlab("S_lcqo_imag.m");
-
 }
 
 
@@ -764,12 +788,6 @@ bool LinearCombinationOfOrbitals::read_SLEPC_solution(void)
   std::vector<EigenvalueProblem::eigen_state>  ev(number_of_converged_solutions);
   double shift = EigenSolver::get_shift() * Constants::Hartree;
 
-  //inizialize local solution containers
-  initialize_solution_container(number_of_converged_solutions);
-
-  //inizialize total system solution containers
-  _total_system_hamiltonian->initialize_solution_container
-                           (number_of_converged_solutions);
 
   //take a reference to the container of the eigenvalue problem solution
   std::vector<eigen_problem_solution>& solution = _solution;
@@ -785,11 +803,6 @@ bool LinearCombinationOfOrbitals::read_SLEPC_solution(void)
                                      Constants::Hartree; // + shift;
 
     ev[ind].index = ind;
-
-    if (ev[ind].energy > shift)
-      ev[ind].particle = "el";
-    else
-      ev[ind].particle = "hl";
   }
 
   // sorting of the solutions
@@ -824,9 +837,6 @@ bool LinearCombinationOfOrbitals::read_SLEPC_solution(void)
 
     solution[i].eigen_energy = ev[i].energy;
     total_system_solution[i].eigen_energy = ev[i].energy;
-
-    solution[i].particle = ev[i].particle;
-    total_system_solution[i].particle = ev[i].particle;
 
     solution[i].statistics = "Fermi";
     total_system_solution[i].statistics = "Fermi";

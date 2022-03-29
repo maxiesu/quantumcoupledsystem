@@ -1,0 +1,5 @@
+*.log.0
+*.dat
+*.m
+*.vtu
+.x86_64-linux/*
