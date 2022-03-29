@@ -2,3 +2,4 @@
 *.dat
 *.m
 *.vtu
+.x86_64-linux/*
