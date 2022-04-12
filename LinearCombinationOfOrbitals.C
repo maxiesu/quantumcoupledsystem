@@ -128,6 +128,9 @@ void LinearCombinationOfOrbitals::do_init()
   get_parameter("number_of_dots", shift_size);
   _shift_x.resize(shift_size);
 
+
+
+
 }
 
 
@@ -145,7 +148,12 @@ void LinearCombinationOfOrbitals::do_solve_for_kpoint(const Point& kpoint)
 {
   set_k_point(kpoint);
 
-  //_single_dot_hamiltonian->solve_for_kpoint(k_point);
+//  std::vector<double> envelope_function_0(400);
+//  envelope_function_0 = get_solution("EnvelopeFunctions_0");
+//  for (size_t i; i < envelope_function_0.size(); ++i)
+//    std::cerr<<__FILE__<<" "<<__LINE__<<" envelope_function_0[i] "<envelope_function_0[i]<<"\n\n";
+
+//  _single_dot_hamiltonian->solve_for_kpoint(k_point);
 
   //we don't solve the total_system_hamiltonian, we just
   //assemble the total hamiltonian
@@ -155,16 +163,18 @@ void LinearCombinationOfOrbitals::do_solve_for_kpoint(const Point& kpoint)
   const ModelOptions& options = get_options();
 
   Utils::Timer tt;
+  std::ostringstream os;
 
   assemble(options);    //assemble the lcqo generalized eigenvalue problem
 
-  std::cerr<<__LINE__<<" "<<__FILE__<<" ASSEMBLE time: "<<tt.elapsed_string()<<"\n\n";
-
+  os<<"ASSEMBLE_time:_"<<tt.elapsed_string()<<"\n\n";
+  Messages::info(os.str());
   std::cerr<<"dim(_H_lcqo_real) = "<<_H_lcqo_real->n()<<"\n\n";
 
   _H_lcqo_size = _H_lcqo_real->n();
 
   tt.reset();
+  os.str(""); os.clear();
 
   //inizialize local solution containers
   initialize_solution_container(_H_lcqo_size);
@@ -172,10 +182,11 @@ void LinearCombinationOfOrbitals::do_solve_for_kpoint(const Point& kpoint)
   //inizialize total system solution containers
   _total_system_hamiltonian->initialize_solution_container
                                             (_H_lcqo_size);
+  tt.reset();
+  solve_eigen_value_problem(_H_lcqo_size / 2);  //solve generalized eigenvalue problem
 
-  solve_eigen_value_problem(_H_lcqo_size);  //solve generalized eigenvalue problem
-
-  std::cerr<<"\n\n"<<__LINE__<<" "<<__FILE__<<" SOLVE time: "<<tt.elapsed_string()<<"\n\n";
+  os<<"\n\n"<<"SOLVE_time:_"<<tt.elapsed_string()<<"\n\n";
+  Messages::info(os.str());
 
 }
 
@@ -210,81 +221,79 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
   //define the total system wave functions with the proper dimension
   std::vector<libMesh::Complex> total_basis_wave_function_a(total_sys_dim);
   std::vector<libMesh::Complex> total_basis_wave_function_b(total_sys_dim);
-
-  for (int shift_i = 0; shift_i < number_of_repetitions; ++shift_i)
-  {
-    for (int shift_j = 0; shift_j < number_of_repetitions; ++shift_j)
-    {
-      if (std::abs(shift_i - shift_j) > 1)
-        continue;
-
-      for (int state_i = 0; state_i < basis_size; ++state_i)
-      { //std::cerr<<__LINE__<<" "<<__FILE__<<" state_i = "<<state_i<<" shift_i = "<<shift_i<<" shift_j = "<<shift_j<<"\n\n";
-        //set all the elements of the vector to 0
-        std::fill(total_basis_wave_function_a.begin(),
+  
+  
+  
+  
+  for (int i = 0; i < m; ++i)
+  { 
+  //calculate right shift and state
+  int k = (i / basis_size);
+  int state_i = (i - k * basis_size);
+  int shift_i = (i / basis_size); 
+  
+  
+  std::fill(total_basis_wave_function_a.begin(),
             total_basis_wave_function_a.end(), 0);
 
-        size_t sd_len_i = single_dot_sol[state_i].eigen_vector.size();
+  size_t sd_len_i = single_dot_sol[state_i].eigen_vector.size();
 
-        for (size_t pos = 0; pos < sd_len_i; ++pos)
-        {
-          unsigned int shift_xi = _shift_x[shift_i];
+  for (size_t pos = 0; pos < sd_len_i; ++pos)
+  {
+    unsigned int shift_xi = _shift_x[shift_i];
 
-          total_basis_wave_function_a[shift_xi + pos] =
-              single_dot_sol[state_i].eigen_vector[pos];
-        }
-
-        for (int state_j = 0; state_j < basis_size; ++state_j)
-        {
-          std::fill(total_basis_wave_function_b.begin(),
+    total_basis_wave_function_a[shift_xi + pos] =
+        single_dot_sol[state_i].eigen_vector[pos];
+  }
+  
+    for (int j = i; j < m; ++j)
+    {
+      //calculate the right shift
+      k = (j / basis_size);
+      int state_j = (j - k * basis_size);
+      int shift_j = (j / basis_size);
+      
+      if (std::abs(shift_i - shift_j) > 1)
+        continue;
+  
+      std::fill(total_basis_wave_function_b.begin(),
               total_basis_wave_function_b.end(), 0);
 
-          size_t sd_len_j = single_dot_sol[state_j].eigen_vector.size();
+      size_t sd_len_j = single_dot_sol[state_j].eigen_vector.size();
 
-          for (size_t pos = 0; pos < sd_len_j; ++pos)
-          {
-            unsigned int shift_xj = _shift_x[shift_j];
+      for (size_t pos = 0; pos < sd_len_j; ++pos)
+      {
+        unsigned int shift_xj = _shift_x[shift_j];
 
-            total_basis_wave_function_b[shift_xj + pos] =
-                single_dot_sol[state_j].eigen_vector[pos];
-          }
+        total_basis_wave_function_b[shift_xj + pos] =
+            single_dot_sol[state_j].eigen_vector[pos];
+      }
+  
+      libMesh::Complex current_H_element = 0;
+      current_H_element = _total_system_hamiltonian->
+          calculate_hamiltonian_matrix_element(
+              total_basis_wave_function_a,
+              total_basis_wave_function_b); 
+          
+      libMesh::Complex current_S_element = 0;
+      current_S_element = _total_system_hamiltonian->
+          scalar_product(total_basis_wave_function_a,
+              total_basis_wave_function_b);
+          
+      _H_lcqo_real->set(i , j, current_H_element.real());
+      _H_lcqo_imag->set(i, j, current_H_element.imag());
 
-          Utils::Timer tt1;
-
-          //calculate the current H element passing the two total system wave
-          //functions for the product <phi_l | H_t | phi_k>
-          libMesh::Complex current_H_element = 0;
-          current_H_element = _total_system_hamiltonian->
-              calculate_hamiltonian_matrix_element(
-                  total_basis_wave_function_a,
-                  total_basis_wave_function_b);
-          if (state_j == 0 && state_i == 0 && shift_i == 0 && shift_j == 0)
-            std::cerr<<__LINE__<<" "<<__FILE__<<" calculate_hamiltonian_matrix_element time: "<<tt1.elapsed_string()<<"\n\n";
-
-          //calculate the row and column index to put the current element in the
-          //exact position
-          size_t row_index = 0;
-          size_t column_index = 0;
-          row_index = (shift_i * basis_size) + state_i;
-          column_index = (shift_j * basis_size) + state_j;
-
-
-          _H_lcqo_real->set(row_index , column_index , current_H_element.real());
-          _H_lcqo_imag->set(row_index , column_index , current_H_element.imag());
-
-          tt1.reset();
-
-          libMesh::Complex current_S_element = 0;
-          current_S_element = _total_system_hamiltonian->
-              scalar_product(total_basis_wave_function_a,
-                  total_basis_wave_function_b);
-
-          if (state_j == 0 && state_i == 0 && shift_i == 0 && shift_j == 0)
-             std::cerr<<__LINE__<<" "<<__FILE__<<" scalar_product time: "<<tt1.elapsed_string()<<"\n\n";
-
-          _S_lcqo_real->set(row_index , column_index , current_S_element.real());
-          _S_lcqo_imag->set(row_index , column_index , current_S_element.imag());
-        }
+      _S_lcqo_real->set(i, j, current_S_element.real());
+      _S_lcqo_imag->set(i, j, current_S_element.imag());
+      
+      if (j != i)
+      {
+      _H_lcqo_real->set(j, i, current_H_element.real());
+      _H_lcqo_imag->set(j, i, ((-1)*current_H_element.imag()));
+      
+      
+      _S_lcqo_real->set(j, i, current_S_element.real());
+      _S_lcqo_imag->set(j, i, ((-1)*current_S_element.imag()));
       }
     }
   }
@@ -293,12 +302,98 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
 
   _S_lcqo_real->close();
   _S_lcqo_imag->close();
+  
 
-  _H_lcqo_real->print_matlab("H_lcqo_real.m");
-  _H_lcqo_imag->print_matlab("H_lcqo_imag.m");
+//   for (int shift_i = 0; shift_i < number_of_repetitions; ++shift_i)
+//   {
+//     for (int shift_j = 0; shift_j < number_of_repetitions; ++shift_j)
+//     {
+//       if (std::abs(shift_i - shift_j) > 1)
+//         continue;
+// 
+//       for (int state_i = 0; state_i < basis_size; ++state_i)
+//       { //std::cerr<<__LINE__<<" "<<__FILE__<<" state_i = "<<state_i<<" shift_i = "<<shift_i<<" shift_j = "<<shift_j<<"\n\n";
+//         //set all the elements of the vector to 0
+//         std::fill(total_basis_wave_function_a.begin(),
+//             total_basis_wave_function_a.end(), 0);
+// 
+//         size_t sd_len_i = single_dot_sol[state_i].eigen_vector.size();
+// 
+//         for (size_t pos = 0; pos < sd_len_i; ++pos)
+//         {
+//           unsigned int shift_xi = _shift_x[shift_i];
+// 
+//           total_basis_wave_function_a[shift_xi + pos] =
+//               single_dot_sol[state_i].eigen_vector[pos];
+//         }
+// 
+//         for (int state_j = 0; state_j < basis_size; ++state_j)
+//         {
+//           std::fill(total_basis_wave_function_b.begin(),
+//               total_basis_wave_function_b.end(), 0);
+// 
+//           size_t sd_len_j = single_dot_sol[state_j].eigen_vector.size();
+// 
+//           Utils::Timer tt2;
+//           for (size_t pos = 0; pos < sd_len_j; ++pos)
+//           {
+//             unsigned int shift_xj = _shift_x[shift_j];
+// 
+//             total_basis_wave_function_b[shift_xj + pos] =
+//                 single_dot_sol[state_j].eigen_vector[pos];
+//           }
+// //          std::cerr<<__FILE__<<" "<<__LINE__<<" total_basis_wave_function_b[shift_xj + pos] = ... "<<tt2.elapsed_string()<<"\n";
+// 
+//           Utils::Timer tt1;
+// 
+//           //calculate the current H element passing the two total system wave
+//           //functions for the product <phi_l | H_t | phi_k>
+//           libMesh::Complex current_H_element = 0;
+//           current_H_element = _total_system_hamiltonian->
+//               calculate_hamiltonian_matrix_element(
+//                   total_basis_wave_function_a,
+//                   total_basis_wave_function_b);
+//           if (state_j == 0 && state_i == 0 && shift_i == 0 && shift_j == 0)
+//             std::cerr<<__LINE__<<" "<<__FILE__<<" calculate_hamiltonian_matrix_element time: "<<tt1.elapsed_string()<<"\n\n";
+// 
+//           //calculate the row and column index to put the current element in the
+//           //exact position
+//           size_t row_index = 0;
+//           size_t column_index = 0;
+//           row_index = (shift_i * basis_size) + state_i;
+//           column_index = (shift_j * basis_size) + state_j;
+// 
+// 
+//           _H_lcqo_real->set(row_index , column_index , current_H_element.real());
+//           _H_lcqo_imag->set(row_index , column_index , current_H_element.imag());
+// 
+//           tt1.reset();
+// 
+//           libMesh::Complex current_S_element = 0;
+//           current_S_element = _total_system_hamiltonian->
+//               scalar_product(total_basis_wave_function_a,
+//                   total_basis_wave_function_b);
+// 
+//           if (state_j == 0 && state_i == 0 && shift_i == 0 && shift_j == 0)
+//              std::cerr<<__LINE__<<" "<<__FILE__<<" scalar_product time: "<<tt1.elapsed_string()<<"\n\n";
+// 
+//           _S_lcqo_real->set(row_index , column_index , current_S_element.real());
+//           _S_lcqo_imag->set(row_index , column_index , current_S_element.imag());
+//         }
+//       }
+//     }
+//   }
+//   _H_lcqo_real->close();
+//   _H_lcqo_imag->close();
+// 
+//   _S_lcqo_real->close();
+//   _S_lcqo_imag->close();
 
-  _S_lcqo_real->print_matlab("S_lcqo_real.m");
-  _S_lcqo_imag->print_matlab("S_lcqo_imag.m");
+//  _H_lcqo_real->print_matlab("H_lcqo_real.m");
+//  _H_lcqo_imag->print_matlab("H_lcqo_imag.m");
+//
+//  _S_lcqo_real->print_matlab("S_lcqo_real.m");
+//  _S_lcqo_imag->print_matlab("S_lcqo_imag.m");
 }
 
 
@@ -376,28 +471,35 @@ void LinearCombinationOfOrbitals::solve_eigen_value_problem
 
   //std::cout << "  (EFA) Solving using guess (Hartree) " << st_shift_value << endl;
 
+  EigenSolver::eig_value_problem_general(slep_opt);
+
   bool foundall = false;
 
-  while (!foundall)
-  {
-
-    int result;
-
-    if (_haveS)
-      result = EigenSolver::eig_value_problem_general(slep_opt);
-    else
-      result = EigenSolver::eig_value_problem(slep_opt);
-
-    if (result !=0 )
-      throw SolveFailedException("Eigensolver problem\n");
-
-    foundall = read_SLEPC_solution();
-
-    slep_opt.spectrum_shift = get_new_spectrum_shift();
-    slep_opt.ev_number = solver_opt.number_of_eigenstates;
-  }
+  foundall = read_SLEPC_solution();
 
   int result = EigenSolver::clear_slepc();
+
+
+//  while (!foundall)
+//  {
+//
+//    int result;
+//
+//    if (_haveS)
+//      result = EigenSolver::eig_value_problem_general2(slep_opt);
+//    else
+//      result = EigenSolver::eig_value_problem(slep_opt);
+//
+//    if (result !=0 )
+//      throw SolveFailedException("Eigensolver problem\n");
+//
+//    foundall = read_SLEPC_solution();
+//
+//    slep_opt.spectrum_shift = get_new_spectrum_shift();
+//    slep_opt.ev_number = solver_opt.number_of_eigenstates;
+//  }
+//
+//  int result = EigenSolver::clear_slepc();
 
 
 }
@@ -815,7 +917,7 @@ void LinearCombinationOfOrbitals::calculate_shift(void)
   }
   else if (number_of_dots == 1)
   {
-    _shift_x[0] = 0;
+    _shift_x[0] = 0; std::cerr<<__FILE__<<" "<<__LINE__<<" _single_dot_hamiltonian->get_H_dim(); "<<dot_size<<"\n";
   }
   else  //number_of_dots > 1
   {

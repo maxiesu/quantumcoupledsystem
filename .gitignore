@@ -3,3 +3,6 @@
 *.m
 *.vtu
 .x86_64-linux/*
+test/
+test_copy_2022_04_05/
+2022_04_11_files/
