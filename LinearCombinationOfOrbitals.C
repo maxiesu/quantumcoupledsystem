@@ -183,8 +183,10 @@ void LinearCombinationOfOrbitals::do_solve_for_kpoint(const Point& kpoint)
   _total_system_hamiltonian->initialize_solution_container
                                             (_H_lcqo_size);
   tt.reset();
-  solve_eigen_value_problem(_H_lcqo_size / 2);  //solve generalized eigenvalue problem
+  solve_eigen_value_problem(_H_lcqo_size);  //solve generalized eigenvalue problem
 
+
+  
   os<<"\n\n"<<"SOLVE_time:_"<<tt.elapsed_string()<<"\n\n";
   Messages::info(os.str());
 
@@ -253,7 +255,7 @@ void LinearCombinationOfOrbitals::do_assemble(const ModelOptions& options)
       int state_j = (j - k * basis_size);
       int shift_j = (j / basis_size);
       
-      if (std::abs(shift_i - shift_j) > 1)
+      if (std::abs(shift_i - shift_j) > 2)
         continue;
   
       std::fill(total_basis_wave_function_b.begin(),
@@ -772,6 +774,7 @@ bool LinearCombinationOfOrbitals::read_SLEPC_solution(void)
                                      Constants::Hartree; // + shift;
 
     ev[ind].index = ind;
+    ev[ind].particle = "el";
   }
 
   // sorting of the solutions
@@ -809,6 +812,9 @@ bool LinearCombinationOfOrbitals::read_SLEPC_solution(void)
 
     solution[i].statistics = "Fermi";
     total_system_solution[i].statistics = "Fermi";
+    
+    solution[i].particle = "el";
+    total_system_solution[i].particle = "el";
 
 
     //read eigenvectors
